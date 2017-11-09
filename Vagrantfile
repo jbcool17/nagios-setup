@@ -18,13 +18,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "file", source: "./NagiosGraphInstaller.sh", destination: "/tmp/NagiosGraphInstaller.sh"
 
   config.vm.provision "shell" do |s|
-    ssh_pub_key = File.readlines("./id_rsa_mac.pub").first.strip
     s.inline = <<-SHELL
-      echo "<==== Copying KEYS ====>"
-      mkdir -p /root/.ssh
-      touch /root/.ssh/authorized_keys
-      echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
-      echo #{ssh_pub_key} >> /root/.ssh/authorized_keys
 
       echo "<==== YUM UPDATE ====>"
       yum update -y
